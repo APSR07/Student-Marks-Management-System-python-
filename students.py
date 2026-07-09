@@ -9,10 +9,10 @@ def addStudentAndMarks():
     #     print(f"{i+1} Enter Student Marks : ")
     #     studentMarks.append(int(input().strip()))
     i = 0
-    print(f"Press 'E' to Exit and 'C' to Continue : ")
+    print(f"Press 'E' to Exit or Any button to Continue : ")
     responce = str(input())
     if responce == "E":
-        pass
+        return
     else:
         while True:
 
@@ -20,7 +20,6 @@ def addStudentAndMarks():
                 print(f"{i+1} Enter Student Name : ")
                 Student_Name = str(input())
                 if Student_Name.isalpha():
-                    print("DID worked")
                     studentNames.append(Student_Name)
                     break
                 else:
@@ -50,8 +49,38 @@ def display():
     
 # Highest Marks
 def highest_Marks():
-    
+    high = 0
+    max = int(studentMarks[0])
+    for i in range(len(studentMarks)):
+        cur_val = int(studentMarks[i])            # so if current is highest then it will stay high, if not then we update it
+        if cur_val > max:
+            max = cur_val
+            high = i
+    print(f"Hightest Marks is : {studentMarks[high]} by {studentNames[high]}.")
+            
 
+def lowest():
+    high = 0
+    max = int(studentMarks[0])
+    for i in range(len(studentMarks)):
+        cur_val = int(studentMarks[i])            
+        if cur_val < max:           # copy and pasted same thing just change the symbol, > to <
+            max = cur_val 
+            high = i
+    print(f"Hightest Marks is : {studentMarks[high]} by {studentNames[high]}.")
+
+def average():
+    sum = 0
+    count = 0
+    for i in range(len(studentMarks)):
+        sum += int(studentMarks[i])
+        count = int(studentMarks[-1])
+
+    print(f"The Average of Students are : {sum / count}")
+
+
+def close():
+    raise SystemExit
 
 while True:
     print("\nMenu:")
@@ -64,7 +93,15 @@ while True:
     choice = input("Enter your choice:  ")
 
     match choice:
-        case '1' | 'Add Student':
+        case '1' | 'Add Student' | 'Add':
             addStudentAndMarks()
-        case '2' | 'Display Students':
+        case '2' | 'Display Students' | 'Display':
             display()
+        case '3' | 'Highest Marks' | 'Highest':
+            highest_Marks()
+        case '4' | 'Lowest Marks' | 'Lowest':
+            lowest()
+        case '5' | 'Average' | 'Average Marks':
+            average()
+        case '6' | 'Exit':
+            close()
